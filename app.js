@@ -1,4 +1,3 @@
-const origBoard = '';
 const huPlayer = 'X';
 const aiPlayer = 'O';
 
@@ -67,16 +66,6 @@ function checkRow(a, b, c, move) {
   return result;
 }
 
-function declareWinner() {}
-
-function emptySquare() {
-  return origBoard.filter(s => typeof s == 'number');
-}
-
-function bestSpot() {
-  return emptySquare()[0];
-}
-
 function getBox(number) {
   return document.getElementById('s' + number).innerHTML;
 }
@@ -87,7 +76,7 @@ function clearBox(number) {
 
 function checkTie() {
   if (emptySquare().length == 0) {
-    declareWinner('Tie Game!');
+    setMessage('Tie Game!');
     return true;
   }
 
