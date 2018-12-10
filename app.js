@@ -1,15 +1,6 @@
+const origBoard = '';
 const huPlayer = 'X';
 const aiPlayer = 'O';
-const winCombos = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-  [1, 4, 7],
-  [2, 5, 8],
-  [3, 6, 9],
-  [1, 5, 9],
-  [3, 5, 7]
-];
 
 const square = document.querySelector('.square');
 
@@ -42,11 +33,11 @@ function switchTurn() {
   if (checkForWinner(document.turn)) {
     setMessage('Congrats ' + document.turn + ', you won!!');
     document.winner = document.turn;
-  } else if (document.turn === 'X') {
-    document.turn = 'O';
+  } else if (document.turn === huPlayer) {
+    document.turn = aiPlayer;
     setMessage("It's " + document.turn + "'s turn.");
   } else {
-    document.turn = 'X';
+    document.turn = huPlayer;
     setMessage("It's " + document.turn + "'s turn.");
   }
 }
@@ -76,10 +67,29 @@ function checkRow(a, b, c, move) {
   return result;
 }
 
+function declareWinner() {}
+
+function emptySquare() {
+  return origBoard.filter(s => typeof s == 'number');
+}
+
+function bestSpot() {
+  return emptySquare()[0];
+}
+
 function getBox(number) {
   return document.getElementById('s' + number).innerHTML;
 }
 
 function clearBox(number) {
   document.getElementById('s' + number).innerHTML = '';
+}
+
+function checkTie() {
+  if (emptySquare().length == 0) {
+    declareWinner('Tie Game!');
+    return true;
+  }
+
+  return false;
 }
